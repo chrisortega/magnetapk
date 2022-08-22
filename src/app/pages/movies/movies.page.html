@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-label>Serch for movies</ion-label>
+  <ion-input [(ngModel)]="searchString" placeholder="search for movies by title" ></ion-input>
+  <ion-button (click)="searchForMovies()">Search</ion-button>
+  <ion-item button *ngFor="let movie of movies">
+    <ion-label>
+      {{movie.title}}
+      <p>{{movie.torrent}}</p>
+    </ion-label>
+
+  </ion-item>
+</ion-content>
