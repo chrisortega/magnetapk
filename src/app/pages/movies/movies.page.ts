@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
+import { PubsubService } from 'src/app/services/pubsub.service';
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.page.html',
@@ -8,11 +9,17 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviesPage implements OnInit {
   movies:any[] = []
   searchString:string = ""
-  constructor(private movieservice:MovieService) { }
+  constructor(private searchtorrensts:MovieService,private pubsub:PubsubService) { }
 
-  searchForMovies(){
-    this.movieservice.getYifiMovies(this.searchString)
-    .then(res=>console.log(res))
+
+
+  publish(magnet:string){
+    this.pubsub.cloud_publisher_function(magnet)
+    }
+  perform_searchs(){
+    this.searchtorrensts.searchInYify(this.searchString)
+    .then(res =>  res.json())
+    .then(res=>(this.movies = res.data.movies))
   }
 
   ngOnInit() {

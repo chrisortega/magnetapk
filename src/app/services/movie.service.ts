@@ -4,11 +4,15 @@ import { Injectable } from '@angular/core';
 })
 export class MovieService {
 
-  yifi_movies = ""
-  constructor() { }
-  
-  getYifiMovies(searchString:string){
-    
-    return fetch(this.yifi_movies)        
+  providers = {
+    yify:{"api":"https://yts.mx/api/v2/list_movies.json?query_term="}
   }
+  
+
+  
+  searchInYify(searchString:string){
+    return fetch(this.providers.yify.api + searchString)
+  }
+  
+
 }
