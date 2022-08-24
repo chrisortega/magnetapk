@@ -8,13 +8,18 @@ import { PubsubService } from 'src/app/services/pubsub.service';
 })
 export class MoviesPage implements OnInit {
   movies:any[] = []
+  latests:any[] = []
   searchString:string = ""
   constructor(private searchtorrensts:MovieService,private pubsub:PubsubService) { }
 
 
 
   publish(magnet:string){
-    this.pubsub.cloud_publisher_function(magnet)
+    var r = confirm("This will download the torrent")
+    if (r){
+      this.pubsub.cloud_publisher_function(magnet)
+    }
+    
     }
   perform_searchs(){
     this.searchtorrensts.searchInYify(this.searchString)
@@ -23,6 +28,9 @@ export class MoviesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.searchtorrensts.GetLatets()
+    .then(res =>  res.json())
+    .then(res=>(this.latests = res.data.movies))    
   }
 
 }

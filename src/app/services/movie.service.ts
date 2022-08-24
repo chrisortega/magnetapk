@@ -13,6 +13,8 @@ export class MovieService {
   searchInYify(searchString:string){
     return fetch(this.providers.yify.api + searchString)
   }
-  
+  GetLatets(){
+    return fetch(this.providers.yify.api)
+  }
 
 }
