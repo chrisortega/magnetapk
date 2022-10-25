@@ -1,7 +1,5 @@
 {
-  "name": "magnet_android",
-  "integrations": {
-    "capacitor": {}
-  },
+  "name": "magnetapk2",
+  "integrations": {},
   "type": "angular"
 }
